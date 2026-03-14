@@ -11,10 +11,22 @@ const { createDidIdentity, issueVerifiableCredential, verifyVerifiableCredential
 
 const app = express();
 const port = Number(process.env.PORT || 8080);
-const frontendOrigin = process.env.FRONTEND_ORIGIN || 'http://localhost:3000';
 const walletNonceTtlSeconds = Number(process.env.WALLET_NONCE_TTL_SECONDS || 300);
 
-app.use(cors({ origin: frontendOrigin, credentials: true }));
+const allowedOrigins = (process.env.FRONTEND_ORIGIN || 'http://localhost:3000')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (curl, Postman, server-to-server)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error(`CORS: origin ${origin} not allowed`));
+  },
+  credentials: true,
+}));
 app.use(express.json({ limit: '10mb' }));
 
 const upload = multer({
