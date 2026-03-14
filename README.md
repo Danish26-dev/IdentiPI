@@ -142,4 +142,9 @@ identiPI
 ├── vercel.json
 ├── LOCAL_RUN_GUIDE.md
 └── README.md
+│   └── static
+│
+├── vercel.json
+├── LOCAL_RUN_GUIDE.md
+└── README.md
 
