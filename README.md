@@ -100,51 +100,31 @@ Zero Knowledge Proof Engine (Midnight)
 Verifier
 
 Repository Structure
-
 identiPI
+├── 📱 frontend/              # React.js Application
+│   ├── src/
+│   │   ├── pages/            # Dashboards & Landing pages
+│   │   ├── components/       # Idina UI & Shared components
+│   │   ├── services/         # Lace Wallet & API logic
+│   │   └── strands/          # Voice interaction logic
 │
-├── frontend
-│   ├── src
-│   │   ├── pages
-│   │   │   ├── Login.js
-│   │   │   ├── UpdatedUserDashboard.js
-│   │   │   ├── UpdatedVerifierDashboard.js
-│   │   │   └── IdentiPILanding.js
-│   │   │
-│   │   ├── components
-│   │   │   ├── IdinaVoiceAgent.js
-│   │   │   └── UI components
-│   │   │
-│   │   ├── services
-│   │   │   └── laceWallet.js
-│   │   │
-│   │   └── strands
-│   │       └── Idina voice interaction logic
+├── ⚙️ backend/               # Node.js/Express API
+│   ├── src/
+│   │   ├── server.js         # Entry point
+│   │   ├── didVcManager.js   # DID & Credential handling
+│   │   ├── midnightZkp.js    # ZK-Proof orchestration
+│   │   └── s3.js             # Cloud storage interface
 │
-├── backend
-│   ├── src
-│   │   ├── server.js
-│   │   ├── didVcManager.js
-│   │   ├── midnightZkp.js
-│   │   └── s3.js
+├── 🛡️ midnight-zkp/          # Zero-Knowledge Infrastructure
+│   ├── contracts/            # Midnight smart contracts
+│   ├── schemas/              # Data validation schemas
+│   └── scripts/              # Deployment & testing tools
 │
-├── midnight-zkp
-│   ├── contracts
-│   ├── schemas
-│   ├── scripts
-│   └── tools
+├── 🎙️ idina-integration/     # AI Voice Service
+│   ├── app.py                # Python/Flask Backend
+│   ├── templates/            # HTML Views
+│   └── static/               # Voice assets
 │
-├── idina-integration
-│   ├── app.py
-│   ├── templates
-│   └── static
-│
-├── vercel.json
-├── LOCAL_RUN_GUIDE.md
-└── README.md
-│   └── static
-│
-├── vercel.json
-├── LOCAL_RUN_GUIDE.md
-└── README.md
-
+├── vercel.json              # Deployment settings
+├── LOCAL_RUN_GUIDE.md       # Setup instructions
+└── README.md                # Documentation
