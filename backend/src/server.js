@@ -214,6 +214,15 @@ app.get('/api/health', (_req, res) => {
   });
 });
 
+app.get('/', (_req, res) => {
+  res.json({
+    success: true,
+    service: 'identipi-backend',
+    message: 'Backend is live. Use /api/health for health checks.',
+    endpoints: ['/api/health'],
+  });
+});
+
 app.post('/api/auth/login', (req, res) => {
   const email = req.query.email || req.body?.email;
   const role = req.query.role || req.body?.role;
