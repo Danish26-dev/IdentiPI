@@ -1,0 +1,10 @@
+.App {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #020617, #0F172A);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

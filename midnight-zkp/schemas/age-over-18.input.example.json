@@ -1,0 +1,11 @@
+{
+  "statement": "Age >= 18",
+  "privateWitness": {
+    "dateOfBirth": "1999-11-20",
+    "documentHash": "sha256:..."
+  },
+  "publicOutput": {
+    "isAgeOver18": true,
+    "ageCommitmentHash": "sha256:..."
+  }
+}

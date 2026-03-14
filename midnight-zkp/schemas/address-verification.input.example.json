@@ -1,0 +1,12 @@
+{
+  "statement": "Address is valid",
+  "privateWitness": {
+    "addressLine1": "...",
+    "postalCode": "...",
+    "proofDocumentHash": "sha256:..."
+  },
+  "publicOutput": {
+    "isAddressVerified": true,
+    "addressCommitmentHash": "sha256:..."
+  }
+}

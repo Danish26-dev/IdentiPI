@@ -1,0 +1,13 @@
+{
+  "name": "identipi-midnight-zkp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone Midnight Compact contracts for IdentiPI ZKP flows",
+  "scripts": {
+    "compile:age": "compact compile contracts/age-over-18.compact contracts/managed/age-over-18",
+    "compile:degree": "compact compile contracts/degree-verification.compact contracts/managed/degree-verification",
+    "compile:address": "compact compile contracts/address-verification.compact contracts/managed/address-verification",
+    "compile:all": "npm run compile:age && npm run compile:degree && npm run compile:address",
+    "start-proof-server": "docker run -p 6300:6300 midnightntwrk/proof-server:7.0.0 -- midnight-proof-server -v"
+  }
+}

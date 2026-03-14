@@ -1,0 +1,15 @@
+pragma language_version 0.21;
+
+// Publicly stored commitment for auditability, while real age remains private.
+export ledger ageCommitment: Opaque<"string">;
+export ledger ageOver18Result: Opaque<"boolean">;
+
+// User stores a commitment/hash of age data generated off-chain.
+export circuit registerAgeCommitment(ageCommitmentHash: Opaque<"string">): [] {
+  ageCommitment = disclose(ageCommitmentHash);
+}
+
+// Prover submits a boolean result produced by the off-chain ZKP witness flow.
+export circuit proveAgeOver18(isAgeOver18: Opaque<"boolean">): [] {
+  ageOver18Result = disclose(isAgeOver18);
+}

@@ -1,0 +1,15 @@
+pragma language_version 0.21;
+
+// Commitment of degree metadata generated from private source documents.
+export ledger degreeCommitment: Opaque<"string">;
+export ledger degreeVerifiedResult: Opaque<"boolean">;
+
+// Store commitment for verifier-side traceability.
+export circuit registerDegreeCommitment(degreeCommitmentHash: Opaque<"string">): [] {
+  degreeCommitment = disclose(degreeCommitmentHash);
+}
+
+// Result emitted from off-chain witness/circuit process.
+export circuit proveDegreeVerified(isDegreeVerified: Opaque<"boolean">): [] {
+  degreeVerifiedResult = disclose(isDegreeVerified);
+}
