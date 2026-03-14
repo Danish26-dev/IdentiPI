@@ -331,7 +331,7 @@ npm run dev
 Backend runs on
 
 ```
-http://localhost:5000
+[http://localhost:5000],(https://identipi-backend.onrender.com/)
 ```
 
 Start frontend
@@ -345,7 +345,7 @@ npm start
 Frontend runs on
 
 ```
-http://localhost:3000
+[http://localhost:3000],(https://identi-pi-kappa.vercel.app/)
 ```
 
 ---
