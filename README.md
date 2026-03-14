@@ -2,7 +2,7 @@
 
 ### Unifying Fragmented Identity with Decentralized Credentials and Privacy-Preserving Proofs
 
-IdentiPI is a decentralized identity infrastructure designed to **unify fragmented identity documents and redefine how they are used in everyday digital interactions**.
+IdentiPI is a decentralized identity DAP(web3) designed to **unify fragmented identity documents and redefine how they are used in everyday digital interactions**.
 
 Instead of repeatedly uploading full documents like Aadhaar, PAN, or degree certificates, users attach them to a **Decentralized Identity (DID)** as **Verifiable Credentials (VCs)**. When verification is required, the system generates **Zero Knowledge Proofs (ZKPs)** to confirm only the required fact without revealing the document itself.
 
