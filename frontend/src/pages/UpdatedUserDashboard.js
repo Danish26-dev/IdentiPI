@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
@@ -58,7 +58,7 @@ const UpdatedUserDashboard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate]);
 
-  const persistMockData = (userId, patch) => {
+  const persistMockData = useCallback((userId, patch) => {
     if (!userId) return;
     const key = getMockStoreKey(userId);
     const existing = JSON.parse(localStorage.getItem(key) || '{}');
@@ -71,14 +71,14 @@ const UpdatedUserDashboard = () => {
       ...patch,
     };
     localStorage.setItem(key, JSON.stringify(merged));
-  };
+  }, []);
 
   const getEffectiveIncomingStatus = (request) => {
     if (!request?.id) return request?.status || 'pending';
     return incomingUiStatusById[request.id] || request.status || 'pending';
   };
 
-  const loadUserData = async (userId, userDid, fallbackUser = user) => {
+  const loadUserData = useCallback(async (userId, userDid, fallbackUser = user) => {
     try {
       const userRes = await axios.get(`${BACKEND_URL}/api/users/${userId}`);
       setUser(userRes.data);
@@ -166,7 +166,7 @@ const UpdatedUserDashboard = () => {
 
       setIncomingRequests(mockData.incomingRequests || []);
     }
-  };
+  }, [persistMockData, user]);
 
   useEffect(() => {
     if (!user?.id || !BACKEND_URL) return undefined;
@@ -581,7 +581,7 @@ const UpdatedUserDashboard = () => {
         })();
       }
     }
-  }, [activeIncomingRequest, showZkpFlowModal, zkpFlowCompleted, zkpFlowStep, zkpFlowSteps.length, user]);
+  }, [activeIncomingRequest, showZkpFlowModal, zkpFlowCompleted, zkpFlowStep, zkpFlowSteps.length, user, loadUserData]);
 
   if (!user) return <div className="min-h-screen bg-[#020617] flex items-center justify-center"><div className="text-white">Loading...</div></div>;
 
