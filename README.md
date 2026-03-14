@@ -1,93 +1,165 @@
-IdentiPI is a decentralized identity platform designed to unify fragmented identity documents and redefine how identity verification works online.
-Instead of repeatedly sharing full documents like Aadhaar, PAN, or certificates, users attach them to a Decentralized Identity (DID) as Verifiable Credentials (VCs) and prove specific facts using Zero Knowledge Proofs (ZKPs).
+# IdentiPI
+
+### Unifying Fragmented Identity with Decentralized Credentials and Privacy-Preserving Proofs
+
+IdentiPI is a decentralized identity infrastructure designed to **unify fragmented identity documents and redefine how they are used in everyday digital interactions**.
+
+Instead of repeatedly uploading full documents like Aadhaar, PAN, or degree certificates, users attach them to a **Decentralized Identity (DID)** as **Verifiable Credentials (VCs)**. When verification is required, the system generates **Zero Knowledge Proofs (ZKPs)** to confirm only the required fact without revealing the document itself.
+
 Example:
-Instead of uploading your Aadhaar to prove age, you can simply prove:
-> “I am above 18”
-without revealing the actual document.
-Problem
-Today digital identity is fragmented and inefficient.
-People store important documents like:
--Aadhaar
--PAN
--Degree certificates
--Address proofs
--across multiple platforms and services.
-Every service asks users to upload the same documents repeatedly, even when only a small piece of information is needed.
-This causes several issues:
-• Overexposure of personal data
-• Repeated verification processes
-• Document inconsistencies and mismatches
-• Inefficient onboarding for services
 
-Solution
-IdentiPI solves this by introducing a unified identity infrastructure.
+Instead of uploading Aadhaar to prove age, a user can simply prove:
+
+**“Age ≥ 18”**
+
+without exposing their personal data.
+
+---
+
+# Problem
+
+Today digital identity is **fragmented and inefficient**.
+
+Documents such as:
+
+- Aadhaar  
+- PAN  
+- Degree certificates  
+- Address proofs  
+
+exist across multiple platforms and services.
+
+Every organization asks users to **upload the same documents repeatedly**, even when only a small piece of information is needed.
+
+This causes:
+
+- Overexposure of personal data  
+- Repeated KYC processes  
+- Inefficient identity verification  
+- Lack of user control over identity  
+
+---
+
+# Solution
+
+IdentiPI introduces a **unified identity infrastructure**.
+
 The platform:
-1. Creates a Decentralized Identity (DID) for every user.
-2. Converts verified documents into Verifiable Credentials (VCs).
-3. Calculates an Identity Reliability Score similar to a credit score.
-4. Allows services to verify specific attributes using Zero Knowledge Proofs.
 
-Instead of sharing full documents, users generate privacy-preserving proofs.
-Example verification flows:
--Age verification
--Address verification
--Degree verification
--Identity confirmation
+1. Creates a **Decentralized Identity (DID)** for each user  
+2. Converts verified documents into **Verifiable Credentials (VCs)**  
+3. Calculates an **Identity Reliability Score** similar to a CIBIL score  
+4. Enables **privacy-preserving verification through Zero Knowledge Proofs**
 
-Core Features
-Decentralized Identity (DID)
-Users generate a unique decentralized identity.
-Example format:
+Instead of sharing documents, users share **cryptographic proofs**.
+
+Examples:
+
+- Age verification  
+- Degree verification  
+- Address verification  
+- Identity confirmation  
+
+---
+
+# Core Features
+
+## Decentralized Identity (DID)
+
+Each user creates a DID which acts as the root identity.
+
+Example:
+
+```
 did:identipi:uuid
-The DID acts as the root identity layer for all credentials.
+```
 
-Verifiable Credentials (VC)
-Documents are converted into cryptographically verifiable credentials issued by trusted verifiers.
+This DID becomes the anchor for all credentials and verifications.
+
+---
+
+## Verifiable Credentials (VC)
+
+Documents become **cryptographically signed credentials**.
+
 Examples:
-Aadhaar verified
-PAN verified
-Degree verified
-Address verified
-redentials are linked to the user’s DID.
-Identity Reliability Score
-IdentiPI introduces an identity score similar to a CIBIL score.
 
-The score evaluates:
-• number of verified credentials
-• document consistency
-• trusted issuers
-This helps organizations quickly evaluate identity reliability.
+- Aadhaar Verified  
+- PAN Verified  
+- Degree Verified  
+- Address Verified  
 
-Zero Knowledge Proof Verification
-IdentiPI enables selective disclosure using ZK proofs.
-Users can prove specific claims without revealing the underlying document.
-Examples:
-Proof Request	Result
-Age ≥ 18	True/False
-Degree verified	True/False
-Address verified	True/False
-This significantly improves privacy and security.
+These credentials are linked to the user's DID.
 
-Idina Voice Identity Assistant
-IdentiPI includes Idina, an AI voice assistant built with the Strands SDK.
-Idina allows users to interact with their identity system using voice commands.
+---
+
+## Identity Reliability Score
+
+IdentiPI introduces an **Identity Reliability Score**, similar to a credit score.
+
+Score factors include:
+
+- number of verified credentials  
+- document consistency  
+- trusted issuers  
+
+Range:
+
+```
+0 - 100
+```
+
+This allows organizations to quickly assess identity reliability.
+
+---
+
+## Zero Knowledge Proof Verification
+
+IdentiPI enables **selective disclosure**.
+
+Users can prove specific claims without revealing underlying documents.
+
+Example proofs:
+
+| Request | Proof Result |
+|-------|------|
+| Age ≥ 18 | True / False |
+| Address Verified | True / False |
+| Degree Verified | True / False |
+
+This improves privacy and security.
+
+---
+
+## Idina Voice Identity Assistant
+
+IdentiPI includes **Idina**, a voice-based AI identity assistant built with **Strands SDK**.
+
+Users interact with their identity using voice commands.
+
 Example commands:
 
-• "Create my DID"
-• "Request a credential verification"
-• "Show my identity score"
-• "List my credentials"
-Idina appears as a 3D animated interface that listens, processes, and responds via voice.
-System Architecture
-IdentiPI follows a hybrid Web3 architecture.
-Sensitive identity proofs are decentralized while application logic remains cloud-based.
+- "Create my DID"
+- "Request a credential verification"
+- "Show my identity score"
+- "List my credentials"
+
+Idina appears as a **3D animated interface** that listens, processes commands, and responds via voice.
+
+---
+
+# System Architecture
+
+IdentiPI follows a **Hybrid Web3 Architecture** where trust and verification are decentralized while application logic remains cloud-based.
+
+```
 User
  ↓
-IdentiPI dApp (React)
+IdentiPI dApp (React Frontend)
  ↓
 Backend API (Express)
  ↓
-Cloud Database (In-Memory / Future DB)
+Cloud Database
  ↓
 IPFS (Document Storage)
  ↓
@@ -98,33 +170,209 @@ Verifiable Credentials
 Zero Knowledge Proof Engine (Midnight)
  ↓
 Verifier
+```
 
-Repository Structure
+---
+
+# User Journey
+
+```
+User registers
+      ↓
+User creates DID
+      ↓
+User uploads documents
+      ↓
+Documents converted into Verifiable Credentials
+      ↓
+Identity Score calculated
+      ↓
+Verifier requests proof
+      ↓
+User approves request
+      ↓
+ZK proof generated
+      ↓
+Verifier receives True / False
+```
+
+---
+
+# Zero Knowledge Proof Flow
+
+```
+Verifier requests proof
+        ↓
+User receives request
+        ↓
+User approves verification
+        ↓
+Midnight ZKP engine generates proof
+        ↓
+Proof verifies specific claim
+        ↓
+Verifier receives result
+```
+
+Example:
+
+```
+Request: Age ≥ 18
+Result: TRUE
+```
+
+No personal data is exposed.
+
+---
+
+# Repository Structure
+
+```
 identiPI
-├── 📱 frontend/              # React.js Application
-│   ├── src/
-│   │   ├── pages/            # Dashboards & Landing pages
-│   │   ├── components/       # Idina UI & Shared components
-│   │   ├── services/         # Lace Wallet & API logic
-│   │   └── strands/          # Voice interaction logic
 │
-├── ⚙️ backend/               # Node.js/Express API
-│   ├── src/
-│   │   ├── server.js         # Entry point
-│   │   ├── didVcManager.js   # DID & Credential handling
-│   │   ├── midnightZkp.js    # ZK-Proof orchestration
-│   │   └── s3.js             # Cloud storage interface
+├── frontend
+│   ├── src
+│   │   ├── pages
+│   │   │   ├── Login.js
+│   │   │   ├── UpdatedUserDashboard.js
+│   │   │   ├── UpdatedVerifierDashboard.js
+│   │   │   └── IdentiPILanding.js
+│   │   │
+│   │   ├── components
+│   │   │   ├── IdinaVoiceAgent.js
+│   │   │   └── UI components
+│   │   │
+│   │   ├── services
+│   │   │   └── laceWallet.js
+│   │   │
+│   │   └── strands
+│   │       └── Idina voice interaction logic
 │
-├── 🛡️ midnight-zkp/          # Zero-Knowledge Infrastructure
-│   ├── contracts/            # Midnight smart contracts
-│   ├── schemas/              # Data validation schemas
-│   └── scripts/              # Deployment & testing tools
+├── backend
+│   ├── src
+│   │   ├── server.js
+│   │   ├── didVcManager.js
+│   │   ├── midnightZkp.js
+│   │   └── s3.js
 │
-├── 🎙️ idina-integration/     # AI Voice Service
-│   ├── app.py                # Python/Flask Backend
-│   ├── templates/            # HTML Views
-│   └── static/               # Voice assets
+├── midnight-zkp
+│   ├── contracts
+│   ├── schemas
+│   ├── scripts
+│   └── tools
 │
-├── vercel.json              # Deployment settings
-├── LOCAL_RUN_GUIDE.md       # Setup instructions
-└── README.md                # Documentation
+├── idina-integration
+│   ├── app.py
+│   ├── templates
+│   └── static
+│
+├── vercel.json
+├── LOCAL_RUN_GUIDE.md
+└── README.md
+```
+
+---
+
+# Tech Stack
+
+Frontend
+
+- React
+- React Router
+- TailwindCSS
+- Framer Motion
+- React Three Fiber
+
+Backend
+
+- Node.js
+- Express
+
+Identity Layer
+
+- Decentralized Identifiers (DID)
+- Verifiable Credentials
+
+Privacy Layer
+
+- Midnight ZKP
+
+AI Assistant
+
+- Strands SDK
+
+Storage
+
+- IPFS
+
+Wallet Integration
+
+- Lace Wallet
+
+---
+
+# Local Development
+
+Clone repository
+
+```
+git clone https://github.com/your-repo/identiPI
+cd identiPI
+```
+
+Start backend
+
+```
+cd backend
+npm install
+npm run dev
+```
+
+Backend runs on
+
+```
+http://localhost:5000
+```
+
+Start frontend
+
+```
+cd frontend
+npm install
+npm start
+```
+
+Frontend runs on
+
+```
+http://localhost:3000
+```
+
+---
+
+# Future Improvements
+
+- persistent database
+- full IPFS document storage
+- production ZKP service
+- mobile identity wallet
+- issuer trust registry
+- multi-chain DID support
+
+---
+
+# Use Cases
+
+IdentiPI can be used for:
+
+- banking KYC
+- university credential verification
+- job applications
+- government identity services
+- digital identity infrastructure
+
+---
+
+# License
+
+MIT License
