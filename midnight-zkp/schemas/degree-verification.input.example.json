@@ -1,0 +1,12 @@
+{
+  "statement": "Degree is authentic",
+  "privateWitness": {
+    "studentId": "ABC12345",
+    "certificateNumber": "CERT-2021-7788",
+    "institutionRecordHash": "sha256:..."
+  },
+  "publicOutput": {
+    "isDegreeVerified": true,
+    "degreeCommitmentHash": "sha256:..."
+  }
+}

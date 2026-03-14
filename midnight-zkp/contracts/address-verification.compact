@@ -1,0 +1,15 @@
+pragma language_version 0.21;
+
+// Commitment of address proof material (document hash, issuer metadata, etc.).
+export ledger addressCommitment: Opaque<"string">;
+export ledger addressVerifiedResult: Opaque<"boolean">;
+
+// Store commitment generated off-chain from private address documents.
+export circuit registerAddressCommitment(addressCommitmentHash: Opaque<"string">): [] {
+  addressCommitment = disclose(addressCommitmentHash);
+}
+
+// Result emitted from off-chain witness/circuit process.
+export circuit proveAddressVerified(isAddressVerified: Opaque<"boolean">): [] {
+  addressVerifiedResult = disclose(isAddressVerified);
+}
