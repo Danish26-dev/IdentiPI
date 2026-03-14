@@ -372,35 +372,6 @@ const UpdatedUserDashboard = () => {
     setActiveIncomingRequest(null);
   };
 
-  const persistApprovalAfterFlow = async (incomingRequest) => {
-    if (!incomingRequest?.id || !user?.id) return;
-
-    setPersistingApproval(true);
-    try {
-      const res = await axios.post(`${BACKEND_URL}/api/incoming-requests/${incomingRequest.id}/respond`, {
-        approved: true,
-      });
-
-      if (res.data.success) {
-        setIncomingUiStatusById((prev) => ({
-          ...prev,
-          [incomingRequest.id]: 'approved',
-        }));
-        await loadUserData(user.id, user.did, user);
-        toast.success('ZKP approved and synced to verifier dashboard.');
-      }
-    } catch (error) {
-      setIncomingUiStatusById((prev) => ({
-        ...prev,
-        [incomingRequest.id]: 'approved_ui',
-      }));
-      const message = error?.response?.data?.message || 'Could not sync approval to backend. UI state only.';
-      toast.error(message);
-    } finally {
-      setPersistingApproval(false);
-    }
-  };
-
   const downloadDidQr = () => {
     const canvas = didQrCanvasRef.current?.querySelector('canvas');
     if (!canvas || !user?.did) {
@@ -571,11 +542,46 @@ const UpdatedUserDashboard = () => {
       }));
 
       if (zkpPersistedRequestRef.current !== activeIncomingRequest.id) {
+        const requestToPersist = activeIncomingRequest;
+        const userId = user?.id;
+        const userDid = user?.did;
+        const userSnapshot = user;
         zkpPersistedRequestRef.current = activeIncomingRequest.id;
-        persistApprovalAfterFlow(activeIncomingRequest);
+
+        (async () => {
+          if (!requestToPersist?.id || !userId) {
+            setPersistingApproval(false);
+            return;
+          }
+
+          setPersistingApproval(true);
+          try {
+            const res = await axios.post(`${BACKEND_URL}/api/incoming-requests/${requestToPersist.id}/respond`, {
+              approved: true,
+            });
+
+            if (res.data.success) {
+              setIncomingUiStatusById((prev) => ({
+                ...prev,
+                [requestToPersist.id]: 'approved',
+              }));
+              await loadUserData(userId, userDid, userSnapshot);
+              toast.success('ZKP approved and synced to verifier dashboard.');
+            }
+          } catch (error) {
+            setIncomingUiStatusById((prev) => ({
+              ...prev,
+              [requestToPersist.id]: 'approved_ui',
+            }));
+            const message = error?.response?.data?.message || 'Could not sync approval to backend. UI state only.';
+            toast.error(message);
+          } finally {
+            setPersistingApproval(false);
+          }
+        })();
       }
     }
-  }, [activeIncomingRequest, showZkpFlowModal, zkpFlowCompleted, zkpFlowStep, zkpFlowSteps.length]);
+  }, [activeIncomingRequest, showZkpFlowModal, zkpFlowCompleted, zkpFlowStep, zkpFlowSteps.length, user]);
 
   if (!user) return <div className="min-h-screen bg-[#020617] flex items-center justify-center"><div className="text-white">Loading...</div></div>;
 
